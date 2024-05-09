@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import HeaderMenu from './pages/headerMenu';
+import Content from './pages/content';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <div className='title-container'>
+                <span style={{lineHeight: '50px', paddingLeft: '20px', fontSize: '20px'}}>上岸站</span>
+            </div>
+            <div className='content-container'>
+                <HeaderMenu></HeaderMenu>
+                <Content></Content>
+            </div>
+        </div>
+    );
 }
 
 export default App;
