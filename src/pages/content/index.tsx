@@ -3,6 +3,7 @@ import {Routes, Route, Navigate} from 'react-router-dom'
 import Administration from '../administration'
 import AnalyseJob from '../analyseJob'
 import JobTable from '../jobTable'
+import LoginPage from '../login'
 import MasterPlan from '../masterPlan'
 import MonthPlan from '../monthPlan'
 import NationalPolicy from '../nationalPolicy'
@@ -15,7 +16,8 @@ export default function Content() {
     return (
         <div className="content-container">
             <Routes>
-                <Route path="/" element={<Navigate replace to="/policy/national"/>}/>
+                <Route path="/login" element={<LoginPage />}/>
+                <Route path="/" element={<Navigate replace to="/login"/>}/>
                 <Route path='/national/policy' element={<NationalPolicy/>}/>
                 <Route path='/provincial/policy' element={<ProvincialPolicy/>}/>
                 <Route path="/national/jobs" element={<JobTable/>}/>

@@ -1,12 +1,12 @@
 import { InfoCircleOutlined } from "@ant-design/icons"
-import request from "umi-request"
+import request from './request'
 
 export const getUnits = ()=>{
-    return request.get('http://127.0.0.1:8080/provincial/units')
+    return request.get('http://localhost:8080/provincial/units')
 }
 
 export const getDepartments = (unit:any)=>{
-    return request.get('http://127.0.0.1:8080/provincial/departments',{
+    return request.get('http://localhost:8080/provincial/departments',{
         params: {
             unit:unit
         }
@@ -14,7 +14,7 @@ export const getDepartments = (unit:any)=>{
 }
 
 export const getJobs = (info:any)=>{
-    return request.get('http://127.0.0.1:8080/provincial/jobs',{
+    return request.get('http://localhost:8080/provincial/jobs',{
         params:{
             ...info
         }
@@ -22,7 +22,7 @@ export const getJobs = (info:any)=>{
 }
 
 export const follow = (id:any,isFollow:any)=>{
-    return request.get('http://127.0.0.1:8080/provincial/follow',{
+    return request.get('http://localhost:8080/provincial/follow',{
         params:{
             id:id,
             isFollow:isFollow
@@ -31,7 +31,7 @@ export const follow = (id:any,isFollow:any)=>{
 }
 
 export const getFollows = (info:any)=>{
-    return request.get('http://127.0.0.1:8080/provincial/followList',{
+    return request.get('http://localhost:8080/provincial/followList',{
         params:{
             ...info
         }
@@ -39,7 +39,7 @@ export const getFollows = (info:any)=>{
 }
 
 export const getCountByDepartment = (info:any)=>{
-    return request.get('http://127.0.0.1:8080/provincial/departments/count',{
+    return request.get('http://localhost:8080/provincial/departments/count',{
         params:{
             ...info
         }

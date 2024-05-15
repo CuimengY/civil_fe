@@ -1,7 +1,7 @@
-import request from "umi-request"
+import request from './request'
 
 export const getPlans = (part:any)=> {
-    return request.get('http://127.0.0.1:8080/plan/getPlan',{
+    return request.get('http://localhost:8080/plan/getPlan',{
         params:{
             part:part
         }
@@ -9,7 +9,7 @@ export const getPlans = (part:any)=> {
 }
 
 export const addPlans = (plan:any,part:any)=> {
-    return request.post('http://127.0.0.1:8080/plan/addPlan',{
+    return request.post('http://localhost:8080/plan/addPlan',{
         params:{
             plan:plan,
             part:part
@@ -18,7 +18,7 @@ export const addPlans = (plan:any,part:any)=> {
 }
 
 export const deletePlans = (id:any)=>{
-    return request.delete('http://127.0.0.1:8080/plan/deletePlan',{
+    return request.delete('http://localhost:8080/plan/deletePlan',{
         params:{
             id:id
         }
@@ -26,7 +26,7 @@ export const deletePlans = (id:any)=>{
 }
 
 export const updatePlans = (id:any,plan:any,complete:any)=>{
-    return request.post('http://127.0.0.1:8080/plan/updatePlan',{
+    return request.post('http://localhost:8080/plan/updatePlan',{
         params:{
             id:id,
             plan:plan,
@@ -36,11 +36,11 @@ export const updatePlans = (id:any,plan:any,complete:any)=>{
 }
 
 export const getDailyPlans = ()=> {
-    return request.get('http://127.0.0.1:8080/plan/getDailyPlan')
+    return request.get('http://localhost:8080/plan/getDailyPlan')
 }
 
 export const getDailyPlanByDate = (date:any)=> {
-    return request.get('http://127.0.0.1:8080/plan/getDailyPlanByDate',{
+    return request.get('http://localhost:8080/plan/getDailyPlanByDate',{
         params:{
             date:date
         }
@@ -48,7 +48,7 @@ export const getDailyPlanByDate = (date:any)=> {
 }
 
 export const addDailyPlans = (plan:any,date:any)=> {
-    return request.post('http://127.0.0.1:8080/plan/addDailyPlan',{
+    return request.post('http://localhost:8080/plan/addDailyPlan',{
         params:{
             plan:plan,
             date:date
@@ -57,7 +57,7 @@ export const addDailyPlans = (plan:any,date:any)=> {
 }
 
 export const deleteDailyPlans = (id:any)=>{
-    return request.delete('http://127.0.0.1:8080/plan/deleteDailyPlan',{
+    return request.delete('http://localhost:8080/plan/deleteDailyPlan',{
         params:{
             id:id
         }
@@ -65,7 +65,7 @@ export const deleteDailyPlans = (id:any)=>{
 }
 
 export const updateDailyPlans = (plan:any,id:any,complete:any)=>{
-    return request.post('http://127.0.0.1:8080/plan/updateDailyPlan',{
+    return request.post('http://localhost:8080/plan/updateDailyPlan',{
         params:{
             plan:plan,
             id:id,

@@ -98,8 +98,9 @@ export default function HeaderMenu() {
             ]
         }
     ];
-    const [openKeys, setopenKeys] = useState<string[]>([]);
     const location = useLocation();
+    const hideSide = ()=>location.pathname === '/login';
+    const [openKeys, setopenKeys] = useState<string[]>([]);
     const {pathname} = location;
     const getDefaultSelect = (pathName: any) => {
         let key = "/";
@@ -143,15 +144,19 @@ export default function HeaderMenu() {
         setSelectKeys([select.key])
     }
     return (
-        <div className='sideBar'>
-            <Menu
-                mode='inline'
-                items={items}
-                openKeys={openKeys}
-                onOpenChange={onOpenChange}
-                onClick={onClick}
-                selectedKeys={selectKeys}
-            />
+        <div>
+            {
+                hideSide() ? null : <div className="sideBa">
+                     <Menu
+                        mode='inline'
+                        items={items}
+                        openKeys={openKeys}
+                        onOpenChange={onOpenChange}
+                        onClick={onClick}
+                        selectedKeys={selectKeys}
+                    />
+                </div>
+            }
         </div>
     )
 }
