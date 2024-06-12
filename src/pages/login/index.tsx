@@ -16,7 +16,7 @@ export default function LoginPage() {
             console.log(encryptPassword)
             login(form.getFieldValue("username"),encryptPassword).then(res=>{
                 if(res){
-                    navigate("/policy/national");
+                    navigate("/national/policy");
                 }else {
                     message.error("用户名或密码错误")
                 }

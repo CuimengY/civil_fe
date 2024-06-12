@@ -17,7 +17,7 @@ import {
 import './index.css'
 import {useLocation, useNavigate} from 'react-router-dom'
 
-export default function HeaderMenu() {
+export default function SideMenu() {
     const items = [
         {
             label: "国考",
@@ -144,19 +144,13 @@ export default function HeaderMenu() {
         setSelectKeys([select.key])
     }
     return (
-        <div>
-            {
-                hideSide() ? null : <div className="sideBa">
-                     <Menu
-                        mode='inline'
-                        items={items}
-                        openKeys={openKeys}
-                        onOpenChange={onOpenChange}
-                        onClick={onClick}
-                        selectedKeys={selectKeys}
-                    />
-                </div>
-            }
-        </div>
+        <Menu
+            mode='inline'
+            items={items}
+            openKeys={openKeys}
+            onOpenChange={onOpenChange}
+            onClick={onClick}
+            selectedKeys={selectKeys}
+        />
     )
 }

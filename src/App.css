@@ -4,7 +4,7 @@
     margin: 0;
 }
 
-.title-container {
+/* .title-container {
     padding: 0;
     margin: 0 0 20px 0;
     height: 50px;
@@ -13,4 +13,25 @@
 
 .content-container {
     display: flex;
-}
+} */
+.trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  #components-layout-demo-custom-trigger .trigger:hover {
+    color: #1890ff;
+  }
+  
+  .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .site-layout .site-layout-background {
+    background: #fff;
+  }
