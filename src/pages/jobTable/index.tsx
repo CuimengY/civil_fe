@@ -56,7 +56,8 @@ export default function JobTable() {
         {
             title: "招考人数",
             dataIndex: "count",
-            key: "count"
+            key: "count",
+            sorter:(a:any,b:any)=>a.count - b.count
         },
         {
             title: "职位简介",
@@ -169,21 +170,35 @@ export default function JobTable() {
     const [tabKey, setTabKey] = useState('bureau');
     const [isopen, setOpen] = useState(false);
 
+    const exportContent = ()=>{
+
+    }
     const items = [
         {
             key:"bureau",
             label:"机构信息",
-            children:<Table loading={bureauLoading} columns={bureauColumns} dataSource={bureauDatasource} rowKey={record=>record.departmentid+""+record?.bureau+record?.level} />
+            children:<>
+            <Button style={{float:'right', marginBottom:'10px'}} onClick={exportContent}>导出</Button>
+            <Table loading={bureauLoading} columns={bureauColumns} dataSource={bureauDatasource} rowKey={record=>record.departmentid+""+record?.bureau+record?.level} />
+            </>
         },
         {
             key:"job",
             label:"岗位信息",
-            children:<Table loading={loading} columns={columns} dataSource={dataSources} rowKey={record=>record.id+""+record?.departmentid} />
+            children:
+            <>
+            <Button style={{float:'right', marginBottom:'10px'}} onClick={exportContent}>导出</Button>
+            <Table loading={loading} columns={columns} dataSource={dataSources} rowKey={record=>record.id+""+record?.departmentid} />
+            </>
         },
         {
             key:"follow",
             label:"关注列表",
-            children:<Table loading={followloading} columns={columns} dataSource={followList} rowKey={record=>record.id+""+record?.departmentid} />
+            children:
+            <>
+            <Button style={{float:'right', marginBottom:'10px'}} onClick={exportContent}>导出</Button>
+            <Table loading={followloading} columns={columns} dataSource={followList} rowKey={record=>record.id+""+record?.departmentid} />
+            </>
         }
     ]
     useEffect(()=>{

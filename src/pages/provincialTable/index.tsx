@@ -35,6 +35,7 @@ export default function ProvincialTable() {
     const [followloading, setFollowLoading] = useState(false);
     const [tabKey, setTabKey] = useState('job');
     const [isopen, setOpen] = useState(false);
+    const [total,setTotal] = useState(0);
     const columns = [
         {
             title: "招考部门",
@@ -106,11 +107,28 @@ export default function ProvincialTable() {
             )
         },
     ]
+    const getJobsInfo = (page:any, pageSize: any)=>{
+        setDataSources([]);
+        setLoading(true);
+        getJobs({...form.getFieldsValue(),
+            page,
+            pageSize
+        }).then(res=>{
+            setTotal(res?.total)
+            setDataSources(res?.list);
+            setLoading(false);
+        })
+    }
     const items = [
         {
             key:"job",
             label:"岗位信息",
-            children:<Table loading={loading} columns={columns} dataSource={dataSources} rowKey={record=>record.id} />
+            children:<Table loading={loading} columns={columns} dataSource={dataSources} rowKey={record=>record.id} pagination={{
+                onChange: getJobsInfo,
+                defaultPageSize: 10,
+                defaultCurrent: 1,
+                total: total
+            }} />
         },
         {
             key:"follow",
@@ -125,16 +143,8 @@ export default function ProvincialTable() {
         getUnits().then(res=>{
             setUnits(res);
         })
-        getJobsInfo();
+        getJobsInfo(1,10);
     },[])
-    const getJobsInfo = ()=>{
-        setDataSources([]);
-        setLoading(true);
-        getJobs(form.getFieldsValue()).then(res=>{
-            setDataSources(res);
-            setLoading(false);
-        })
-    }
     const getFollowList = ()=>{
         setFollowList([]);
         setFollowLoading(true);
@@ -154,14 +164,14 @@ export default function ProvincialTable() {
     const resetJob = ()=>{
         form.resetFields();
         if(tabKey === 'job') {
-            getJobsInfo();
+            getJobsInfo(1,10);
         } else {
             getFollowList();
         }
     }
     const searchJob = ()=>{
         if(tabKey === 'job') {
-            getJobsInfo();
+            getJobsInfo(1,10);
         } else {
             getFollowList();
         }
@@ -170,7 +180,7 @@ export default function ProvincialTable() {
         form.resetFields();
         setTabKey(key);
         if(key === 'job') {
-            getJobsInfo();
+            getJobsInfo(1,10);
         } else {
             getFollowList();
         }
