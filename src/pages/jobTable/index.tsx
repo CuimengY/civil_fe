@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { deleteFollowJob, followJob, getBureauByDepartment, getDepartments, getFollowByInfo, getJobsByInfo } from '../../api/national'
 import PageLayout from '../../components/pageLayout'
 import './index.css'
+import handleExportExcel from '../../components/utils/handleExportExcel'
 
 interface Job {
     name:any,
@@ -170,15 +171,12 @@ export default function JobTable() {
     const [tabKey, setTabKey] = useState('bureau');
     const [isopen, setOpen] = useState(false);
 
-    const exportContent = ()=>{
-
-    }
     const items = [
         {
             key:"bureau",
             label:"机构信息",
             children:<>
-            <Button style={{float:'right', marginBottom:'10px'}} onClick={exportContent}>导出</Button>
+            <Button style={{float:'right', marginBottom:'10px'}} onClick={()=>handleExportExcel("机构信息",[{title:"机构信息",columns:bureauColumns,dataSource:bureauDatasource}])}>导出</Button>
             <Table loading={bureauLoading} columns={bureauColumns} dataSource={bureauDatasource} rowKey={record=>record.departmentid+""+record?.bureau+record?.level} />
             </>
         },
@@ -187,7 +185,7 @@ export default function JobTable() {
             label:"岗位信息",
             children:
             <>
-            <Button style={{float:'right', marginBottom:'10px'}} onClick={exportContent}>导出</Button>
+            <Button style={{float:'right', marginBottom:'10px'}} onClick={()=>handleExportExcel("岗位信息",[{title:"岗位信息",columns:columns,dataSource:dataSources}])}>导出</Button>
             <Table loading={loading} columns={columns} dataSource={dataSources} rowKey={record=>record.id+""+record?.departmentid} />
             </>
         },
@@ -196,7 +194,7 @@ export default function JobTable() {
             label:"关注列表",
             children:
             <>
-            <Button style={{float:'right', marginBottom:'10px'}} onClick={exportContent}>导出</Button>
+            <Button style={{float:'right', marginBottom:'10px'}} onClick={()=>handleExportExcel("关注列表",[{title:"关注列表",columns:columns,dataSource:followList}])}>导出</Button>
             <Table loading={followloading} columns={columns} dataSource={followList} rowKey={record=>record.id+""+record?.departmentid} />
             </>
         }

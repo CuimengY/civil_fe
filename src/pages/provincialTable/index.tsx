@@ -2,6 +2,7 @@ import {Button, Col, Descriptions, Form, Input, Modal, Row, Select, Table, Tabs}
 import React, { useEffect, useState } from 'react'
 import { getJobs, getUnits, getDepartments, getFollows, follow } from '../../api/provincial'
 import PageLayout from '../../components/pageLayout'
+import handleExportExcel from '../../components/utils/handleExportExcel'
 
 interface Job {
     id:any,
@@ -123,17 +124,25 @@ export default function ProvincialTable() {
         {
             key:"job",
             label:"岗位信息",
-            children:<Table loading={loading} columns={columns} dataSource={dataSources} rowKey={record=>record.id} pagination={{
+            children:
+            <>
+            <Button style={{float:'right', marginBottom:'10px'}} onClick={()=>handleExportExcel("岗位信息",[{title:"岗位信息",columns:columns,dataSource:dataSources}])}>导出</Button>
+            <Table loading={loading} columns={columns} dataSource={dataSources} rowKey={record=>record.id} pagination={{
                 onChange: getJobsInfo,
                 defaultPageSize: 10,
                 defaultCurrent: 1,
                 total: total
             }} />
+            </>
         },
         {
             key:"follow",
             label:"关注列表",
-            children:<Table loading={followloading} columns={columns} dataSource={followList} rowKey={record=>record.id} />
+            children:
+            <>
+            <Button style={{float:'right', marginBottom:'10px'}} onClick={()=>handleExportExcel("关注列表",[{title:"关注列表",columns:columns,dataSource:followList}])}>导出</Button>
+            <Table loading={followloading} columns={columns} dataSource={followList} rowKey={record=>record.id} />
+            </>
         }
     ]
     const filterOption = (input: string, option?: { label: string; value: string }) =>
