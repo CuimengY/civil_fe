@@ -1,6 +1,6 @@
 import {Button, Col, Descriptions, Form, Input, Modal, Row, Select, Table, Tabs} from 'antd'
 import React, { useEffect, useState } from 'react'
-import { deleteFollowJob, followJob, getBureauByDepartment, getDepartments, getFollowByInfo, getJobsByInfo } from '../../api/national'
+import { deleteFollowJob, exportFollow, followJob, getBureauByDepartment, getDepartments, getFollowByInfo, getJobsByInfo } from '../../api/national'
 import PageLayout from '../../components/pageLayout'
 import './index.css'
 import handleExportExcel from '../../components/utils/handleExportExcel'
@@ -171,6 +171,23 @@ export default function JobTable() {
     const [tabKey, setTabKey] = useState('bureau');
     const [isopen, setOpen] = useState(false);
 
+    const exportByServer = ()=>{
+        exportFollow(form.getFieldsValue()).then(res=>{
+            let url = window.URL.createObjectURL(new Blob([res],{
+                type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+            }))
+            var a = document.createElement("a");
+            document.body.appendChild(a);
+            a.href = url;
+            a.download = "关注信息.xlsx";
+            a.click();
+            setTimeout(()=>{
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            },0)
+        })
+    }
+
     const items = [
         {
             key:"bureau",
@@ -194,7 +211,7 @@ export default function JobTable() {
             label:"关注列表",
             children:
             <>
-            <Button style={{float:'right', marginBottom:'10px'}} onClick={()=>handleExportExcel("关注列表",[{title:"关注列表",columns:columns,dataSource:followList}])}>导出</Button>
+            <Button style={{float:'right', marginBottom:'10px'}} onClick={exportByServer}>导出</Button>
             <Table loading={followloading} columns={columns} dataSource={followList} rowKey={record=>record.id+""+record?.departmentid} />
             </>
         }

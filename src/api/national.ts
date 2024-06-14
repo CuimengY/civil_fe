@@ -56,3 +56,12 @@ export const getCountByBureau = function(info:any) {
         }
     });
 }
+
+export const exportFollow = function(info:any) {
+    return request.get('http://localhost:8080/national/follow/export',{
+        params: {
+            ...info
+        },
+        responseType:'blob'
+    });
+}

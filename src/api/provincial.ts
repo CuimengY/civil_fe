@@ -45,3 +45,12 @@ export const getCountByDepartment = (info:any)=>{
         }
     })
 }
+
+export const exportFollow = function(info:any) {
+    return request.get('http://localhost:8080/provincial/follow/export',{
+        params: {
+            ...info
+        },
+        responseType:'blob'
+    });
+}
